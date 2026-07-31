@@ -18,15 +18,6 @@ function Navigation() {
 export function Header() {
   return (
     <header className="site-header">
-      <div className="topbar">
-        <div className="shell topbar-inner">
-          <span>Đồng hành cùng dự án của bạn</span>
-          <a href={siteConfig.contact.phoneHref}>
-            Hotline: {siteConfig.contact.phone}
-          </a>
-        </div>
-      </div>
-
       <div className="shell header-inner">
         <Link className="brand" href="/" aria-label="Hợp tác đầu tư - Trang chủ">
           <Image

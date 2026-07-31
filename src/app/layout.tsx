@@ -1,24 +1,15 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Noto_Serif, Geist } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { siteConfig } from "@/config/site";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const beVietnamPro = Be_Vietnam_Pro({
+const roboto = Roboto({
   variable: "--font-body",
   subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const notoSerif = Noto_Serif({
-  variable: "--font-heading",
-  subsets: ["latin", "vietnamese"],
-  weight: "variable",
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
@@ -37,10 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="vi"
-      className={cn("h-full", "antialiased", beVietnamPro.variable, notoSerif.variable, "font-sans", geist.variable)}
-    >
+    <html lang="vi" className={cn("h-full", "antialiased", roboto.variable, "font-sans")}>
       <body>
         <Header />
         <main className="site-main">{children}</main>

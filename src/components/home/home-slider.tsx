@@ -51,7 +51,7 @@ export function HomeSlider() {
 
   return (
     <section
-      className="home-slider"
+      className="home-slider corporate-slider"
       aria-label="Giới thiệu hợp tác đầu tư"
       aria-roledescription="carousel"
     >
@@ -115,6 +115,7 @@ export function HomeSlider() {
           ))}
         </div>
       </div>
+      <div className="slider-gold-bar" aria-hidden="true" />
     </section>
   );
 }
