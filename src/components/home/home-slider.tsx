@@ -10,14 +10,13 @@ const slides = [
   {
     src: "https://hoptacdautu.vn/wp-content/uploads/hoptacdautu.vn-1-2.webp",
     alt: "Hợp tác đầu tư bất động sản đô thị",
-    kicker: "Pháp lý · Vốn · Cơ hội",
-    title: "Đầu tư có thẩm định — không chỉ có lời hứa lợi nhuận",
-    description:
-      "Ths. Luật sư Đặng Minh Quang đồng hành thẩm định hồ sơ, cấu trúc hợp tác và bảo vệ quyền lợi nhà đầu tư.",
+    // Ảnh đã có chữ sẵn — hiện full, không crop, không overlay text
+    fit: "contain" as const,
   },
   {
     src: "https://hoptacdautu.vn/wp-content/uploads/hoptacdautu.vn-3-1.webp",
     alt: "Cơ hội đầu tư shophouse và mặt bằng kinh doanh",
+    fit: "cover" as const,
     kicker: "Bất động sản & mặt bằng",
     title: "Tài sản đúng vị trí, hồ sơ đúng pháp lý",
     description:
@@ -26,6 +25,7 @@ const slides = [
   {
     src: "https://hoptacdautu.vn/wp-content/uploads/hoptacdautu.vn-2-1.webp",
     alt: "Đầu tư mô hình dịch vụ nhà hàng khách sạn",
+    fit: "cover" as const,
     kicker: "Dịch vụ & vận hành",
     title: "Mô hình kinh doanh rõ ràng, hợp đồng ràng buộc rõ ràng",
     description:
@@ -36,6 +36,7 @@ const slides = [
 export function HomeSlider() {
   const [activeSlide, setActiveSlide] = useState(0);
   const current = slides[activeSlide];
+  const hasCaption = "title" in current;
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -66,7 +67,11 @@ export function HomeSlider() {
       <div className="slider-stage">
         {slides.map((slide, index) => (
           <div
-            className={`slider-slide${index === activeSlide ? " is-active" : ""}`}
+            className={cn(
+              "slider-slide",
+              slide.fit === "contain" && "is-contain",
+              index === activeSlide && "is-active",
+            )}
             aria-hidden={index !== activeSlide}
             key={slide.src}
           >
@@ -76,33 +81,41 @@ export function HomeSlider() {
               priority={index === 0}
               sizes="100vw"
               src={slide.src}
+              style={{ objectFit: slide.fit }}
             />
           </div>
         ))}
 
-        <div className="slider-overlay" aria-hidden="true" />
+        {hasCaption ? (
+          <>
+            <div className="slider-overlay" aria-hidden="true" />
 
-        <div className="slider-caption">
-          <div className="shell">
-            <p>{current.kicker}</p>
-            <h2>{current.title}</h2>
-            <span className="slider-lead">{current.description}</span>
-            <div className="slider-actions">
-              <Link
-                href="/gioi-thieu"
-                className={cn(buttonVariants({ size: "lg" }), "gold-btn")}
-              >
-                Về người sáng lập
-              </Link>
-              <Link
-                href="/san-pham"
-                className={cn(buttonVariants({ size: "lg", variant: "outline" }), "slider-secondary-btn")}
-              >
-                Xem danh mục đầu tư
-              </Link>
+            <div className="slider-caption">
+              <div className="shell">
+                <p>{current.kicker}</p>
+                <h2>{current.title}</h2>
+                <span className="slider-lead">{current.description}</span>
+                <div className="slider-actions">
+                  <Link
+                    href="/gioi-thieu"
+                    className={cn(buttonVariants({ size: "lg" }), "gold-btn")}
+                  >
+                    Về người sáng lập
+                  </Link>
+                  <Link
+                    href="/san-pham"
+                    className={cn(
+                      buttonVariants({ size: "lg", variant: "outline" }),
+                      "slider-secondary-btn",
+                    )}
+                  >
+                    Xem danh mục đầu tư
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        ) : null}
 
         <Button
           className="slider-arrow slider-arrow-left"

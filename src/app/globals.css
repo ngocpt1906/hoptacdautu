@@ -713,6 +713,12 @@ input {
   object-fit: cover;
 }
 
+/* Slide ảnh kèm chữ sẵn — hiện đủ khung, không crop text */
+.slider-slide.is-contain img {
+  object-fit: contain;
+  object-position: center;
+}
+
 .slider-overlay {
   position: absolute;
   inset: 0;
