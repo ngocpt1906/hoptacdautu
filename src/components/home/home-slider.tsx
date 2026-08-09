@@ -1,42 +1,26 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const slides = [
   {
     src: "https://hoptacdautu.vn/wp-content/uploads/hoptacdautu.vn-1-2.webp",
     alt: "Hợp tác đầu tư bất động sản đô thị",
-    // Ảnh đã có chữ sẵn — hiện full, không crop, không overlay text
-    fit: "contain" as const,
   },
   {
     src: "https://hoptacdautu.vn/wp-content/uploads/hoptacdautu.vn-3-1.webp",
     alt: "Cơ hội đầu tư shophouse và mặt bằng kinh doanh",
-    fit: "cover" as const,
-    kicker: "Bất động sản & mặt bằng",
-    title: "Tài sản đúng vị trí, hồ sơ đúng pháp lý",
-    description:
-      "Từ nhà ở, shophouse đến mặt bằng thương mại — mỗi cơ hội được rà soát điều kiện pháp lý trước khi giải ngân.",
   },
   {
     src: "https://hoptacdautu.vn/wp-content/uploads/hoptacdautu.vn-2-1.webp",
     alt: "Đầu tư mô hình dịch vụ nhà hàng khách sạn",
-    fit: "cover" as const,
-    kicker: "Dịch vụ & vận hành",
-    title: "Mô hình kinh doanh rõ ràng, hợp đồng ràng buộc rõ ràng",
-    description:
-      "Kết nối dự án dịch vụ, F&B và vận hành với khung hợp tác minh bạch và giám sát theo giai đoạn.",
   },
 ] as const;
 
 export function HomeSlider() {
   const [activeSlide, setActiveSlide] = useState(0);
-  const current = slides[activeSlide];
-  const hasCaption = "title" in current;
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -67,11 +51,7 @@ export function HomeSlider() {
       <div className="slider-stage">
         {slides.map((slide, index) => (
           <div
-            className={cn(
-              "slider-slide",
-              slide.fit === "contain" && "is-contain",
-              index === activeSlide && "is-active",
-            )}
+            className={`slider-slide is-contain${index === activeSlide ? " is-active" : ""}`}
             aria-hidden={index !== activeSlide}
             key={slide.src}
           >
@@ -81,41 +61,10 @@ export function HomeSlider() {
               priority={index === 0}
               sizes="100vw"
               src={slide.src}
-              style={{ objectFit: slide.fit }}
+              style={{ objectFit: "contain" }}
             />
           </div>
         ))}
-
-        {hasCaption ? (
-          <>
-            <div className="slider-overlay" aria-hidden="true" />
-
-            <div className="slider-caption">
-              <div className="shell">
-                <p>{current.kicker}</p>
-                <h2>{current.title}</h2>
-                <span className="slider-lead">{current.description}</span>
-                <div className="slider-actions">
-                  <Link
-                    href="/gioi-thieu"
-                    className={cn(buttonVariants({ size: "lg" }), "gold-btn")}
-                  >
-                    Về người sáng lập
-                  </Link>
-                  <Link
-                    href="/san-pham"
-                    className={cn(
-                      buttonVariants({ size: "lg", variant: "outline" }),
-                      "slider-secondary-btn",
-                    )}
-                  >
-                    Xem danh mục đầu tư
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
 
         <Button
           className="slider-arrow slider-arrow-left"
