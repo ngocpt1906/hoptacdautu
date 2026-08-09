@@ -18,6 +18,10 @@ export function Footer() {
             />
           </Link>
           <p>{siteConfig.description}</p>
+          <p className="footer-founder">
+            Định hướng chuyên môn bởi Ths. Luật sư Đặng Minh Quang — Phó Giám đốc
+            Công ty Luật TNHH MTV Công Phúc.
+          </p>
         </div>
 
         <div>

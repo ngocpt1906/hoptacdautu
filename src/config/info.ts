@@ -3,7 +3,7 @@ const phone = "0973166999";
 export const siteInfo = {
   name: "Hợp tác đầu tư",
   description:
-    "Kết nối nguồn lực, kiến tạo cơ hội và đồng hành cùng những dự án đầu tư bền vững.",
+    "Nền tảng hợp tác đầu tư do Ths. Luật sư Đặng Minh Quang định hướng — thẩm định pháp lý, cấu trúc vốn minh bạch và kết nối cơ hội bất động sản, dịch vụ, dự án doanh nghiệp tại Việt Nam.",
   websiteUrl: "https://hoptacdautu.vn",
   contact: {
     phone,
